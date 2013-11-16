@@ -1,0 +1,2 @@
+ADD_EXECUTABLE (app main.cpp)
+TARGET_LINK_LIBRARIES (app ${MHD_LIBRARIES} libserver)
