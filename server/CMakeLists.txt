@@ -1,6 +1,6 @@
-SET (HEADERS Server.h)
+set(HEADERS Server.h)
 
-SET (SRC Server.cpp)
+set(SRC Server.cpp)
 
-ADD_LIBRARY (libserver ${HEADERS} ${SRC})
-TARGET_LINK_LIBRARIES (libserver ${MHD_LIBRARIES})
+add_library(libserver ${HEADERS} ${SRC})
+target_link_libraries(libserver ${MHD_LIBRARIES})

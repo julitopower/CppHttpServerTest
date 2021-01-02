@@ -1,9 +1,9 @@
+#include "Server.h"
 #include <iostream>
-#include "../server/Server.h"
 
-int main(int argc, char** argv)
-{
-  server::Server server( 8080 );
+int main(int argc, char **argv) {
+  const auto port = 8080;
+  server::Server server(port);
+  std::cout << "Starting server in port " << port << std::endl;  
   server.start();
-  std::cout << "This is just a test" << std::endl;
 }

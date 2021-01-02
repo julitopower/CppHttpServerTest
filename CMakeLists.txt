@@ -1,19 +1,20 @@
-CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
 
-PROJECT (CPPHTTPSERVER)
+project(CPPHTTPSERVER)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+set(CMAKE_CXX_STANDARD_REQUIRED 17)
 
-FIND_PACKAGE (PkgConfig REQUIRED)
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(MHD libmicrohttpd)
 
-PKG_CHECK_MODULES (MHD libmicrohttpd)
+if (NOT ${MHD_FOUND})
+  message(FATAL_ERROR "Could not find libmicrohttpd")
+endif()
 
-IF (NOT ${MHD_FOUND})
-  MESSAGE(FATAL_ERROR "Could not find libmicrohttpd")
-ENDIF()
+find_path(MHD_INCLUDE_DIRS microhttpd.h)
+find_library(MHD_LIBRARIES NAMES libmicrohttpd)
 
-FIND_PATH (MHD_INCLUDE_DIRS microhttpd.h)
-FIND_LIBRARY (MHD_LIBRARIES NAMES libmicrohttpd)
+include_directories(${MHD_INCLUDE_DIRS} server) 
 
-INCLUDE_DIRECTORIES (${MHD_INCLUDE_DIRS}) 
-
-ADD_SUBDIRECTORY (bin)
-ADD_SUBDIRECTORY (server) 
+add_subdirectory(bin)
+add_subdirectory(server) 
