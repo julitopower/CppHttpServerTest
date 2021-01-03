@@ -1,0 +1,36 @@
+@startuml
+
+title **Libmicrohttpd wrapper class**
+
+' This enables automatic namespace handling. Namespaces
+' get turned into boxes, instead of being displayed as
+' part of names
+set namespaceSeparator .
+allowmixing
+
+class server.Server {
+- port_ : int
++ Server(port : int)
++ start() : void
+- {static} _handle(...) : enum MHD_Result
+}
+
+note left of server.Server::start
+     start() registers _handle
+     as a microhttpd handler
+end note
+
+note right of server.Server::_handle
+     static: _handle implements a
+     microhttpd handler
+end note
+
+component libmicrohttpd
+libmicrohttpd <.. server.Server
+note on link
+     Server wraps libmicrohttpd with a
+     C++ interface
+end note
+
+
+@enduml
